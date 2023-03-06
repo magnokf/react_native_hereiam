@@ -13,7 +13,12 @@ export default function Home() {
 	
 	
 	function handleParticipantAdd() {
-		//trim remove espaços em branco e iguala a string em maiuscula
+		if (participantName.trim() === '') {
+			setParticipantName('')
+			return Alert.alert('Nome do militar vazio', 'Digite o nome do militar')
+		}
+
+
 		const participantNameTrimed = participantName.trim().toLowerCase()
 		const index = participants.findIndex(participant => participant.trim().toLowerCase() === participantNameTrimed)
 		if (index >= 0) {
@@ -21,7 +26,6 @@ export default function Home() {
 		}
 		setParticipants(participants =>[...participants, participantName.toUpperCase()])
 		setParticipantName('')
-		
 	}
 	
 	function handleParticipantRemove(name: string) {
@@ -37,7 +41,7 @@ export default function Home() {
 				
 			}
 		])
-		console.log(`remove participant ${name}`)
+
 	}
 
 
@@ -47,7 +51,7 @@ export default function Home() {
 		<View style={styles.container}>
 			
 			<Text style={styles.eventName}>
-				Escala de Serviço
+				Escala de Expediente Presencial
 			</Text>
 			
 			
@@ -79,7 +83,7 @@ export default function Home() {
 				showsVerticalScrollIndicator={false}
 				ListEmptyComponent={() => (
 					<Text style={styles.emptyListText}>
-						Nenhum participante adicionado
+						Nenhum militar foi adicionado. Adicione um militar para começar a gerar a escala de serviço do dia.
 					</Text>
 				)}
 				renderItem={({ item }) => {

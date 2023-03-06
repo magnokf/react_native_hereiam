@@ -58,6 +58,7 @@ export const styles = StyleSheet.create({
 		marginTop: 8,
 		justifyContent:'center',
 		alignItems:'center',
+		textAlign:'center'
 		
 	}
 	
