@@ -13,15 +13,19 @@ export default function Home() {
 	
 	
 	function handleParticipantAdd() {
-		if (participants.includes(participantName)) {
+		//trim remove espaços em branco e iguala a string em maiuscula
+		const participantNameTrimed = participantName.trim().toLowerCase()
+		const index = participants.findIndex(participant => participant.trim().toLowerCase() === participantNameTrimed)
+		if (index >= 0) {
 			return Alert.alert('Militar já adicionado', `O militar ${participantName} já foi adicionado`)
 		}
-		setParticipants(participants =>[...participants, participantName])
+		setParticipants(participants =>[...participants, participantName.toUpperCase()])
 		setParticipantName('')
 		
 	}
 	
 	function handleParticipantRemove(name: string) {
+
 		Alert.alert('Remover participante', `Tem certeza que deseja remover ${name}?`, [
 			{
 				text: 'Não',
@@ -29,12 +33,14 @@ export default function Home() {
 			},
 			{
 				text: 'Sim',
-				onPress: () => console.log(`removeu ${name}`)
+				onPress: () => setParticipants(participants => participants.filter(participant => participant !== name))
 				
 			}
 		])
 		console.log(`remove participant ${name}`)
 	}
+
+
 	
 	return (
 		
@@ -53,7 +59,7 @@ export default function Home() {
 					style={styles.input}
 					placeholder={'Nome do militar'}
 					placeholderTextColor={'#6B6B6B'}
-					onChangeText={text => setParticipantName(text)}
+					onChangeText={setParticipantName}
 					value={participantName}
 				
 				/>
