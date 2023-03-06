@@ -61,7 +61,7 @@ export default function Home() {
 			<View style={styles.form}>
 				<TextInput
 					style={styles.input}
-					placeholder={'Nome do militar'}
+					placeholder={'Nome do funcionário'}
 					placeholderTextColor={'#6B6B6B'}
 					onChangeText={setParticipantName}
 					value={participantName}
